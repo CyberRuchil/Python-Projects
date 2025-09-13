@@ -1,0 +1,13 @@
+
+
+.text-gray{
+    color: gray;
+}
+
+.hover-red:hover{
+    color: red;
+}
+
+.checkbox-size-1 {
+  transform: scale(2); 
+}

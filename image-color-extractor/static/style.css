@@ -1,0 +1,26 @@
+:root{
+    --bg-color: #0D1164;
+    --btn-color: #640D5F;
+    --btn-txt-color: #EA2264;
+    --txt-color: #EA2264;
+    --hover-txt-color: white;
+}
+
+.bg-color{
+    background-color: var(--bg-color);
+}
+.btn-color{
+    background-color: var(--btn-color);
+}
+
+.btn-txt-color{
+    color: var(--btn-txt-color);
+}
+
+.txt-color{
+    color: var(--txt-color);
+}
+
+.hover-color:hover{
+    color: var(--hover-txt-color);
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Color Extractor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <div class="bg-color text-white p-4">
+        <h1 class="text-center ">Image Color Extractor</h1>
+    </div>
+    <div class="container my-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="alert alert-dismissible fade show px-0" role="alert">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} mt-2">{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <div class="row mb-4 col-6 justify-content-center ms-2">
+            {% if uploaded_image %}
+            <img src="{{ url_for('uploaded_file', filename=uploaded_image) }}" alt="Uploaded Image" width="200">
+            {% else %}
+            <img class="p-0" src="{{url_for('static', filename='sample.jpg')}}" alt="Image" width="100">
+            {% endif %}
+        </div>
+        <div class="row mb-3 ms-2 col-6 text-nowrap">
+            {% if img_color_list %}
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Color Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for color in img_color_list %}
+                    <tr>
+                        <td class="align-middle">
+                            <div style="max-width: 150px; height: 30px; background-color: {{ color }};" >
+                            </div>
+                        </td>
+                        <td class="align-middle ">{{ color }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        <div class="row ms-2">
+            <form action="{{url_for('home')}}" method="post" enctype="multipart/form-data" class="col-6">
+                <div class="mb-3 p-0">
+                    <label for="formFile" class="form-label txt-color">Upload Image</label>
+                    <input class="form-control" type="file" id="formFile" name="file">
+                </div>
+                <div class="mb-3 col-3">
+                    <label for="formFile" class="form-label txt-color text-nowrap">Number of Color to
+                        Extract</label><br>
+                    <input class="border border-dark form-control" type="text" name="no_of_color" value="10">
+                </div>
+                <button type="submit" class="btn btn-color btn-txt-color col-1 hover-color"
+                    style="min-width: 60px;">Run</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
